@@ -1,9 +1,10 @@
 package com.example.demo;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Getter
@@ -17,13 +18,22 @@ public class Account {
     private Long id;
 
     @Column(nullable = false, unique = true) // 모든 필드에 생략되어 있는 annotation
+    @NotNull(message = "username cannot be null")
     private String username;
 
+    @NotNull(message = "password cannot be null")
     private String password;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date created = new Date();
 
     @Transient // 필드로만 사용. jpa에는 사용되지 않음.
+    @JsonIgnore
     private String no;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "street", column = @Column(name = "homeStreet"))
+    })
+    private Address address;
 }
