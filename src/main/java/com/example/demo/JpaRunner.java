@@ -22,11 +22,17 @@ public class JpaRunner implements ApplicationRunner {
         account.setUsername("minseok");
         account.setPassword("hibernate");
 
+        Study study = new Study();
+        study.setName("JPA Study");
+
+        // 양방향 관계 설정.
+        account.setStudy(account, study);
 
 //        entityManager.persist(account); // jpa
         Session session = entityManager.unwrap(Session.class); // hibernate
-
         session.save(account);
-
+        session.save(study);
     }
+
+
 }

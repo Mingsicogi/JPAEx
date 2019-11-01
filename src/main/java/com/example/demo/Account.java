@@ -6,6 +6,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -27,6 +29,9 @@ public class Account {
     @Temporal(TemporalType.TIMESTAMP)
     private Date created = new Date();
 
+    @OneToMany(mappedBy = "owner")
+    private Set<Study> studies = new HashSet<>();
+
     @Transient // 필드로만 사용. jpa에는 사용되지 않음.
     @JsonIgnore
     private String no;
@@ -36,4 +41,9 @@ public class Account {
             @AttributeOverride(name = "street", column = @Column(name = "homeStreet"))
     })
     private Address address;
+
+    public void setStudy(Account account, Study study) {
+        study.setOwner(account);
+        account.getStudies().add(study);
+    }
 }
