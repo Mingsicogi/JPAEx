@@ -11,6 +11,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@ToString
 @Entity // db에 Account table과 매핑이 되는 것을 나타내는 annotation. hibernate 에서 사용하는 매핑명
 @Table(name = "Account")// db에 생성되는 테이블 명 정의
 public class Account {
