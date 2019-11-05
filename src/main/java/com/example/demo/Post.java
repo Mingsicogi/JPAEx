@@ -20,7 +20,7 @@ public class Post {
 
     private String title;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER) // 주인 설정. fetch 기본 값은 lazy
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL/*, fetch = FetchType.EAGER*/) // 주인 설정. fetch 기본 값은 lazy
     private Set<Comment> comments = new HashSet<>();
 
     public void addComment(Comment comment){

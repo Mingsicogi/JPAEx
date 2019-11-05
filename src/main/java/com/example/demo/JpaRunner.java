@@ -8,6 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
 
 @Component
 @Transactional
@@ -60,13 +65,33 @@ public class JpaRunner implements ApplicationRunner {
 //        session.delete(post1);
 
 
-        Session session = entityManager.unwrap(Session.class);
-        Post dbInfo = session.get(Post.class, 3L);
+//        Session session = entityManager.unwrap(Session.class);
+//        Post dbInfo = session.get(Post.class, 3L);
+//
+//        dbInfo.getComments().forEach(comment -> {
+//            System.out.println("---------------------");
+//            System.out.println(comment.getContent());
+//        });
 
-        dbInfo.getComments().forEach(comment -> {
-            System.out.println("---------------------");
-            System.out.println(comment.getContent());
-        });
+        // JPQL
+        TypedQuery<Post> query = entityManager.createQuery("SELECT p from Post AS p", Post.class);
+        Post dbInfo = query.getSingleResult();
+        dbInfo.getComments().forEach(System.out::println);
+
+
+        // Safe Type Query - Criteria
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Post> query1 = builder.createQuery(Post.class);
+
+        Root<Post> root = query1.from(Post.class);
+
+        List<Post> dbInfos = entityManager.createQuery(query1).getResultList();
+        dbInfos.forEach(System.out::println);
+
+        // Native Query
+        List<Post> list = entityManager.createNativeQuery("SELECT * from Post", Post.class).getResultList();
+        list.forEach(System.out::println);
+
 //        System.out.println(dbInfo.toString());
     }
 
