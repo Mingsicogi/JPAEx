@@ -2,6 +2,7 @@ package com.example.demo;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@ToString
 public class Post {
 
     @Id
@@ -18,7 +20,7 @@ public class Post {
 
     private String title;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL) // 주인 설정.
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER) // 주인 설정. fetch 기본 값은 lazy
     private Set<Comment> comments = new HashSet<>();
 
     public void addComment(Comment comment){

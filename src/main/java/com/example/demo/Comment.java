@@ -2,6 +2,7 @@ package com.example.demo;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.ManyToOne;
 @Entity
 @Getter
 @Setter
+@ToString
 public class Comment {
 
     @Id
@@ -19,6 +21,6 @@ public class Comment {
 
     private String content;
 
-    @ManyToOne
+    @ManyToOne // fetch 기본값은 eager
     private Post post;
 }
