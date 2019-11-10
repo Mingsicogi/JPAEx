@@ -23,7 +23,7 @@ target/
 /nbproject/private/
 /nbbuild/
 /dist/
-/nbdist/
+/nbdist/git
 /.nb-gradle/
 build/
 
@@ -31,5 +31,3 @@ build/
 .vscode/
 
 .mvn/**
-mvnw
-mvnw.cmd

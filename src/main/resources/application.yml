@@ -3,7 +3,7 @@ spring:
     url: jdbc:mysql://localhost:3306/minsDB
     username: root
     password:
-#    url: jdbc:h2:file:classpath:/data
+#    url: jdbc:h2:file:/data
 #    username: min
 #    password: min!123
 #    driver-class-name: org.h2.Driver
