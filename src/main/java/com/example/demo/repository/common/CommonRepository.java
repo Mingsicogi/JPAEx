@@ -10,6 +10,14 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * jpa common method define
+ *
+ * @param <T>
+ * @param <ID>
+ *
+ * @author minssogi
+ */
 @NoRepositoryBean
 public interface CommonRepository<T, ID extends Serializable> extends Repository<T, ID> {
 
