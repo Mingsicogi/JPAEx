@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.entity.Comment;
+import com.example.demo.entity.Post;
 import com.example.demo.repository.CommentRepository;
 import com.example.demo.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;

@@ -1,5 +1,9 @@
 package com.example.demo;
 
+import com.example.demo.entity.Account;
+import com.example.demo.entity.Comment;
+import com.example.demo.entity.Post;
+import com.example.demo.entity.Study;
 import org.hibernate.Session;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

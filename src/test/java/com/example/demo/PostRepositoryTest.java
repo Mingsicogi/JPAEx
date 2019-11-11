@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.entity.Post;
 import com.example.demo.repository.PostRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

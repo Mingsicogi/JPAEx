@@ -1,24 +1,28 @@
-package com.example.demo;
+package com.example.demo.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Setter
-@Getter
 @Entity
-public class Study {
+@Getter
+@Setter
+@ToString
+public class Comment {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String name;
+    private String content;
 
-    @ManyToOne
-    private Account owner;
+    @ManyToOne // fetch 기본값은 eager
+    private Post post;
+
+    private Integer likeCount;
 }

@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.entity.Account;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 @SpringBootApplication
 /**
