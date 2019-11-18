@@ -35,9 +35,9 @@ class StudyRepositoryTest {
         studyRepository.save(study);
         studyRepository.flush();
 
-        Predicate predicate = QStudy.study.name.containsIgnoreCase("k");
-        Optional<Study> repositoryOne = studyRepository.findOne(predicate);
+//        Predicate predicate = QStudy.study.name.containsIgnoreCase("k");
+//        Optional<Study> repositoryOne = studyRepository.findOne(predicate);
 
-        assertThat(repositoryOne).isNotNull();
+//        assertThat(repositoryOne).isNotNull();
     }
 }

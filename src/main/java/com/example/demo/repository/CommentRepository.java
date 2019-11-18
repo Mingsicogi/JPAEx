@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 //@RepositoryDefinition(domainClass = Comment.class, idClass = Long.class)
-public interface CommentRepository extends CommonRepository<Comment, Long>, QuerydslPredicateExecutor<CommentRepository> {
+public interface CommentRepository extends CommonRepository<Comment, Long>/*, QuerydslPredicateExecutor<CommentRepository>*/ {
 
     // 기본 메소드는 공통 interface로 처리함.
 //    Comment save(Comment comment);
