@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Comment;
 import com.example.demo.entity.Post;
 import com.example.demo.entity.Post2;
 import com.example.demo.repository.Post2Repository;
@@ -75,5 +74,26 @@ class PostControllerTest {
                 )
                 .andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    void getPostsAsHateoas() throws Exception {
+        Post2 post = new Post2();
+        post.setTitle("JPA");
+
+        post2Repository.save(post);
+//        postRepository.flush();
+
+        mockMvc.perform
+                (
+                        get("/hateoas/posts")
+                                .param("page", "0")
+                                .param("size", "10")
+                                .param("sort", "id,DESC")
+                                .param("sort", "title")
+                )
+                .andDo(print())
+                .andExpect(status().isOk());
+
     }
 }
