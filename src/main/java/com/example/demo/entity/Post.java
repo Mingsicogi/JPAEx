@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import com.example.demo.event.PostPublishEvent;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.domain.AbstractAggregateRoot;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@ToString
 public class Post extends AbstractAggregateRoot<Post> {
 
     @Id
