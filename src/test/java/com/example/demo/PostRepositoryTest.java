@@ -95,4 +95,25 @@ class PostRepositoryTest {
         all.forEach(System.out::println);
 
     }
+
+    @Test
+    public void queryMethodTest(){
+        Post post = new Post();
+        post.setTitle("spring data jpa");
+        postRepository.save(post);
+
+        List<Post> spr = postRepository.findByTitleStartingWith("spr");
+        assertThat(spr.size()).isEqualTo(1);
+    }
+
+
+    @Test
+    public void namedQueryTest(){
+        Post post = new Post();
+        post.setTitle("spring data jpa");
+        postRepository.save(post);
+
+        List<Post> spr = postRepository.findByTitle("spring data jpa");
+        assertThat(spr.size()).isEqualTo(1);
+    }
 }

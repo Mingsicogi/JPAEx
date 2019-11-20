@@ -14,6 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+//@NamedQuery(name = "Post.findByTitle", query = "SELECT a FROM Post AS a WHERE a.title = ?1") 이것 보단 @Query 을 사용해서 처리함.
 public class Post extends AbstractAggregateRoot<Post> {
 
     @Id
