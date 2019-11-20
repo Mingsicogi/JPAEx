@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,6 +31,7 @@ class PostRepositoryTest {
 
     @PersistenceContext
     private EntityManager entityManager;
+    private String hibernate;
 
     @Test
     @Rollback(false) // 해당 어노테이션을 붙이지 않으면 insert query를 실행하지 않음. -> hibernate가 롤백될것을 알고 insert쿼리를 실해하지 않음.
@@ -157,5 +159,25 @@ class PostRepositoryTest {
 
         List<Post> spr = postRepository.findByTitleSpEL("spring data jpa");
         assertThat(spr.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void updateQueryTest(){
+        Post post = new Post();
+        post.setTitle("Spring");
+        Post savedData = postRepository.save(post);
+        entityManager.flush();
+
+        hibernate = "Hibernate";
+//        int result = postRepository.updateTitleById(hibernate, savedData.getId());
+//        assertThat(result).isEqualTo(1);
+
+//        Optional<Post> byId = postRepository.findById(savedData.getId());
+//        assertThat(byId.orElse(new Post()).getTitle()).isEqualTo(hibernate);
+
+        savedData.setTitle(hibernate);
+
+        List<Post> all = postRepository.findAll();
+        assertThat(all.get(0).getTitle()).isEqualTo(hibernate);
     }
 }
