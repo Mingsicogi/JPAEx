@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -114,6 +116,46 @@ class PostRepositoryTest {
         postRepository.save(post);
 
         List<Post> spr = postRepository.findByTitle("spring data jpa");
+        assertThat(spr.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void sortConditionTest(){
+        Post post = new Post();
+        post.setTitle("spring data jpa");
+        postRepository.save(post);
+
+        List<Post> spr = postRepository.findByTitleSortTitle("spring data jpa", Sort.by("title").descending());
+        assertThat(spr.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void sortConditionTest2(){
+        Post post = new Post();
+        post.setTitle("spring data jpa");
+        postRepository.save(post);
+
+        List<Post> spr = postRepository.findByTitleSortTitleOfLength("spring data jpa", JpaSort.unsafe("LENGTH(title)"));
+        assertThat(spr.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void namedParamTest(){
+        Post post = new Post();
+        post.setTitle("spring data jpa");
+        postRepository.save(post);
+
+        List<Post> spr = postRepository.findByTitleNamedParameter("spring data jpa");
+        assertThat(spr.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void SpELTest(){
+        Post post = new Post();
+        post.setTitle("spring data jpa");
+        postRepository.save(post);
+
+        List<Post> spr = postRepository.findByTitleSpEL("spring data jpa");
         assertThat(spr.size()).isEqualTo(1);
     }
 }
