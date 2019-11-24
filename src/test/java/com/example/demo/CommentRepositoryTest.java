@@ -2,7 +2,9 @@ package com.example.demo;
 
 import com.example.demo.entity.Comment;
 import com.example.demo.entity.Post;
+import com.example.demo.repository.CommentOnly;
 import com.example.demo.repository.CommentRepository;
+import com.example.demo.repository.CommentSummary;
 import com.example.demo.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
@@ -266,6 +268,34 @@ class CommentRepositoryTest {
         commentRepository.findById(1L);
         System.out.println("=============================");
         commentRepository.getById(1L);
+    }
+
+    @Test
+    public void Projection_test(){
+        Post post = new Post();
+        post.setTitle("Projection TEST");
+        postRepository.save(post);
+
+        Comment comment = new Comment();
+        comment.setContent("This is content");
+        comment.setUp(10);
+        comment.setDown(1);
+
+        comment.setPost(post);
+
+        Comment save = commentRepository.save(comment);
+
+
+        Optional<CommentSummary> commentById = commentRepository.getCommentById(save.getId(), CommentSummary.class);
+        assertThat(commentById).isNotEmpty();
+        System.out.println("make by self = " + commentById.get().getUp() + " " + commentById.get().getDown());
+        System.out.println("use custom method = " + commentById.get().voteResult());
+
+        Optional<CommentOnly> commentById1 = commentRepository.getCommentById(save.getId(), CommentOnly.class);
+        assertThat(commentById1).isNotEmpty();
+        System.out.println(commentById1.get().getContent());
+
+
     }
 
     private void createComment(String contentOfComment, int likeCount) {

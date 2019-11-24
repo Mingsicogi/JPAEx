@@ -39,4 +39,6 @@ public interface CommentRepository extends CommonRepository<Comment, Long>/*, Qu
 
     @EntityGraph(attributePaths = "post")
     Optional<Comment> getById(Long id);
+
+    <T> Optional<T> getCommentById(Long id, Class<T> tClass);
 }
