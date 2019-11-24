@@ -9,9 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -302,11 +300,22 @@ class CommentRepositoryTest {
         commentRepository.findAll(isBest().and(isGood()), PageRequest.of(0, 10));
     }
 
+    @Test
+    public void QueryByExample_test(){
+        Comment prove = new Comment();
+        prove.setBest(true);
+
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching().withIgnorePaths("up", "down");
+
+        Example<Comment> example = Example.of(prove, exampleMatcher);
+
+        commentRepository.findAll(example);
+    }
+
     private void createComment(String contentOfComment, int likeCount) {
         Comment comment = new Comment();
         comment.setContent(contentOfComment);
         comment.setLikeCount(likeCount);
-
         commentRepository.save(comment);
     }
 }
