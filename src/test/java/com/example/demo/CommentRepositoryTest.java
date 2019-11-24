@@ -2,10 +2,7 @@ package com.example.demo;
 
 import com.example.demo.entity.Comment;
 import com.example.demo.entity.Post;
-import com.example.demo.repository.CommentOnly;
-import com.example.demo.repository.CommentRepository;
-import com.example.demo.repository.CommentSummary;
-import com.example.demo.repository.PostRepository;
+import com.example.demo.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
@@ -22,6 +19,8 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
 
+import static com.example.demo.repository.CommentSpecs.isBest;
+import static com.example.demo.repository.CommentSpecs.isGood;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -294,8 +293,13 @@ class CommentRepositoryTest {
         Optional<CommentOnly> commentById1 = commentRepository.getCommentById(save.getId(), CommentOnly.class);
         assertThat(commentById1).isNotEmpty();
         System.out.println(commentById1.get().getContent());
+    }
 
+    @Test
+    public void Specification_test(){
+        commentRepository.findAll(isBest().and(isGood()));
 
+        commentRepository.findAll(isBest().and(isGood()), PageRequest.of(0, 10));
     }
 
     private void createComment(String contentOfComment, int likeCount) {

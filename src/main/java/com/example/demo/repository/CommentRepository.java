@@ -4,12 +4,15 @@ import com.example.demo.entity.Comment;
 import com.example.demo.entity.Post;
 import com.example.demo.repository.common.CommonRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 //@RepositoryDefinition(domainClass = Comment.class, idClass = Long.class)
@@ -41,4 +44,8 @@ public interface CommentRepository extends CommonRepository<Comment, Long>/*, Qu
     Optional<Comment> getById(Long id);
 
     <T> Optional<T> getCommentById(Long id, Class<T> tClass);
+
+    List<Comment> findAll(Specification specification);
+
+    List<Comment> findAll(Specification specification, Pageable pageable);
 }
