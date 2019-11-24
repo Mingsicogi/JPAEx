@@ -5,9 +5,11 @@ import com.example.demo.entity.Post;
 import com.example.demo.repository.common.CommonRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 //@RepositoryDefinition(domainClass = Comment.class, idClass = Long.class)
@@ -34,4 +36,7 @@ public interface CommentRepository extends CommonRepository<Comment, Long>/*, Qu
     Page<Comment> findByContentContainsIgnoreCaseAndLikeCountGreaterThan(String keyword, Integer i, Pageable pageable);
 
     Stream<Comment> findByContentContainsIgnoreCaseAndLikeCountGreaterThanOrderByLikeCountDesc(String keyword, Integer i);
+
+    @EntityGraph(attributePaths = "post")
+    Optional<Comment> getById(Long id);
 }

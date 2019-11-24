@@ -261,6 +261,13 @@ class CommentRepositoryTest {
 
     }
 
+    @Test
+    public void EntityGraph_test(){
+        commentRepository.findById(1L);
+        System.out.println("=============================");
+        commentRepository.getById(1L);
+    }
+
     private void createComment(String contentOfComment, int likeCount) {
         Comment comment = new Comment();
         comment.setContent(contentOfComment);
