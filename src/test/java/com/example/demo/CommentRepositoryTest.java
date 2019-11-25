@@ -317,5 +317,6 @@ class CommentRepositoryTest {
         comment.setContent(contentOfComment);
         comment.setLikeCount(likeCount);
         commentRepository.save(comment);
+
     }
 }
