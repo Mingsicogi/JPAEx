@@ -3,19 +3,21 @@ package com.example.demo.repository;
 import com.example.demo.entity.Comment;
 import com.example.demo.entity.Post;
 import com.example.demo.repository.common.CommonRepository;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 //@RepositoryDefinition(domainClass = Comment.class, idClass = Long.class)
+@Repository
 public interface CommentRepository extends CommonRepository<Comment, Long>/*, QuerydslPredicateExecutor<CommentRepository>*/, QueryByExampleExecutor<Comment>, JpaRepository<Comment, Long> {
 
     // 기본 메소드는 공통 interface로 처리함.

@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.entity.Account;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.QueryLookupStrategy;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,7 @@ import javax.validation.Valid;
  *      리턴타입 {접두어}{도메인(생략 가능)}{도입부}By{프로퍼티 표현식}(조건식)[(And|Or){프로퍼티 표현식}(조건식)]{정렬 조건} (매개변수)
  **/
 @EnableJpaRepositories(queryLookupStrategy = QueryLookupStrategy.Key.CREATE_IF_NOT_FOUND)
+@EnableJpaAuditing(auditorAwareRef = "auditAwareConfig")
 @EnableAsync
 public class JpaDemoApplication {
 
