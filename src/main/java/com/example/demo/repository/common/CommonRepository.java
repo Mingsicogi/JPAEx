@@ -1,6 +1,7 @@
 package com.example.demo.repository.common;
 
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
 import org.springframework.lang.NonNull;
@@ -27,8 +28,6 @@ public interface CommonRepository<T, ID extends Serializable> extends Repository
 
     long count();
 
-    @Nullable
-    <E extends T> Optional<E> findById(ID id); // null 처리를 위해 Optional 객체로 감싸서 사용.
-
-    <E extends T> Optional<E> findByIdAnd(ID id);
+//    @Nullable
+//    <E extends T> Optional<E> findById(ID id); // null 처리를 위해 Optional 객체로 감싸서 사용.
 }

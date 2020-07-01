@@ -5,12 +5,20 @@ import com.example.demo.entity.Post;
 import com.example.demo.repository.common.CommonRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.QueryByExampleExecutor;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 //@RepositoryDefinition(domainClass = Comment.class, idClass = Long.class)
-public interface CommentRepository extends CommonRepository<Comment, Long> {
+@Repository
+public interface CommentRepository extends CommonRepository<Comment, Long>/*, QuerydslPredicateExecutor<CommentRepository>*/, QueryByExampleExecutor<Comment>, JpaRepository<Comment, Long> {
 
     // 기본 메소드는 공통 interface로 처리함.
 //    Comment save(Comment comment);
@@ -33,4 +41,15 @@ public interface CommentRepository extends CommonRepository<Comment, Long> {
     Page<Comment> findByContentContainsIgnoreCaseAndLikeCountGreaterThan(String keyword, Integer i, Pageable pageable);
 
     Stream<Comment> findByContentContainsIgnoreCaseAndLikeCountGreaterThanOrderByLikeCountDesc(String keyword, Integer i);
+
+    @EntityGraph(attributePaths = "post")
+    Optional<Comment> getById(Long id);
+
+    <T> Optional<T> getCommentById(Long id, Class<T> tClass);
+
+    List<Comment> findAll(Specification specification);
+
+    List<Comment> findAll(Specification specification, Pageable pageable);
+//
+//    List<Comment> findAll(Example<Comment> example, String a);
 }
