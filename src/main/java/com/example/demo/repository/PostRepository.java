@@ -16,4 +16,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Async
     Future<List<Post>> findAllByTitleContains(String title);
+
+    List<Post>
 }

@@ -29,4 +29,6 @@ public interface CommonRepository<T, ID extends Serializable> extends Repository
 
     @Nullable
     <E extends T> Optional<E> findById(ID id); // null 처리를 위해 Optional 객체로 감싸서 사용.
+
+    <E extends T> Optional<E> findByIdAnd(ID id);
 }
